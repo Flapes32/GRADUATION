@@ -1,24 +1,42 @@
-//
-//  ContentView.swift
-//  course work
-//
-//  Created by  Apple on 14.12.2025.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    @EnvironmentObject var workoutManager: WorkoutManager
+    @EnvironmentObject var healthKit: HealthKitManager
 
-#Preview {
-    ContentView()
+    var body: some View {
+        TabView {
+            MainView()
+                .tabItem {
+                    Label("Главная", systemImage: "house.fill")
+                }
+
+            WorkoutView()
+                .tabItem {
+                    Label("Тренировка", systemImage: "figure.boxing")
+                }
+
+            HeartRateMonitorView()
+                .tabItem {
+                    Label("ЧСС", systemImage: "heart.fill")
+                }
+
+            StatisticsView()
+                .tabItem {
+                    Label("Статистика", systemImage: "chart.bar.fill")
+                }
+
+            SleepAnalysisView()
+                .tabItem {
+                    Label("Сон", systemImage: "moon.fill")
+                }
+
+            AchievementsView()
+                .tabItem {
+                    Label("Достижения", systemImage: "trophy.fill")
+                }
+        }
+        .accentColor(.red)
+        .preferredColorScheme(.dark)
+    }
 }

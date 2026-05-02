@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0"
+       lastSavedToolsVersion="21513" systemVersion="22A380"
+       minimumToolsVersion="Automatic" sourceLanguage="Swift"
+       usedWithSwiftData="NO" userDefinedModelVersionIdentifier="">
+
+    <entity name="CDWorkoutSession" representedClassName="CDWorkoutSession"
+            syncable="YES" codeGenerationType="none">
+        <attribute name="averageHR"      optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="averageHRV"     optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="duration"       optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="endDate"        optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id"             optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="maxHR"          optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="minHR"          optional="YES" attributeType="Double" defaultValueString="220" usesScalarValueType="YES"/>
+        <attribute name="peakLactate"    optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="phase"          optional="YES" attributeType="String"/>
+        <attribute name="startDate"      optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="totalCalories"  optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="rounds" optional="YES" toMany="YES" deletionRule="Cascade"
+                      destinationEntity="CDRoundData" inverseName="workout" inverseEntity="CDRoundData"/>
+    </entity>
+
+    <entity name="CDRoundData" representedClassName="CDRoundData"
+            syncable="YES" codeGenerationType="none">
+        <attribute name="averageHR"    optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="calories"     optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="duration"     optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="endDate"      optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id"           optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="maxHR"        optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="number"       optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="peakLactate"  optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startDate"    optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="workout" optional="YES" maxCount="1" deletionRule="Nullify"
+                      destinationEntity="CDWorkoutSession" inverseName="rounds" inverseEntity="CDWorkoutSession"/>
+    </entity>
+
+    <entity name="CDHeartRateRecord" representedClassName="CDHeartRateRecord"
+            syncable="YES" codeGenerationType="none">
+        <attribute name="id"               optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="timestamp"        optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="value"            optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="workoutSessionId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+
+    <entity name="CDSleepData" representedClassName="CDSleepData"
+            syncable="YES" codeGenerationType="none">
+        <attribute name="awakePercent"     optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="deepSleepPercent" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="durationHours"    optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="endDate"          optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id"               optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="qualityScore"     optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="remSleepPercent"  optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startDate"        optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+
+    <entity name="CDAchievement" representedClassName="CDAchievement"
+            syncable="YES" codeGenerationType="none">
+        <attribute name="completedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="desc"          optional="YES" attributeType="String"/>
+        <attribute name="icon"          optional="YES" attributeType="String"/>
+        <attribute name="id"            optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isCompleted"   optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="progress"      optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title"         optional="YES" attributeType="String"/>
+        <attribute name="total"         optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+
+</model>

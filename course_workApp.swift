@@ -1,17 +1,21 @@
-//
-//  course_workApp.swift
-//  course work
-//
-//  Created by  Apple on 14.12.2025.
-//
-
 import SwiftUI
 
 @main
-struct course_workApp: App {
+struct BoxingTrackerApp: App {
+    @StateObject private var workoutManager = WorkoutManager.shared
+    @StateObject private var healthKit = HealthKitManager.shared
+    @StateObject private var watchSession = WatchSessionManager.shared
+
     var body: some Scene {
         WindowGroup {
-            MainView()
+            ContentView()
+                .environmentObject(workoutManager)
+                .environmentObject(healthKit)
+                .environmentObject(watchSession)
+                .environment(\.managedObjectContext, PersistenceController.shared.context)
+                .task {
+                    await healthKit.requestAuthorization()
+                }
         }
     }
 }
