@@ -181,7 +181,23 @@ class WorkoutRepository {
     func fetchAchievements() -> [Achievement] {
         let request = CDAchievement.fetchRequest()
         do {
-            return try context.fetch(request).map {
+            let results = try context.fetch(request)
+            if results.isEmpty {
+                let defaults = defaultAchievements()
+                defaults.forEach { a in
+                    let entity = CDAchievement(context: context)
+                    entity.id          = a.id
+                    entity.title       = a.title
+                    entity.desc        = a.description
+                    entity.icon        = a.icon
+                    entity.progress    = a.progress
+                    entity.total       = a.total
+                    entity.isCompleted = a.isCompleted
+                }
+                PersistenceController.shared.save()
+                return defaults
+            }
+            return results.map {
                 var a = Achievement(title: $0.title ?? "", description: $0.desc ?? "",
                                     icon: $0.icon ?? "", total: $0.total)
                 a.progress      = $0.progress

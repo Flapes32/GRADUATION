@@ -105,6 +105,8 @@ class WorkoutManager: ObservableObject {
     @Published var peakHeartRates: Int = 0  // times HR > 95% of max
     @Published var currentSession: WorkoutSession?
 
+    var maxHeartRate: Int { userProfile.maxHeartRate }
+
     private let healthKit = HealthKitManager.shared
     private let watchSession = WatchSessionManager.shared
     let lactatePredictor = LactatePredictor()
@@ -129,8 +131,6 @@ class WorkoutManager: ObservableObject {
                 if hr / Double(self.userProfile.maxHeartRate) > 0.95 {
                     self.peakHeartRates += 1
                 }
-                // Forward to Watch
-                WatchSessionManager.shared.sendPhaseUpdate(self.currentPhase)
             }
             .store(in: &cancellables)
     }

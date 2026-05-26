@@ -85,8 +85,8 @@ struct ActiveWorkoutView: View {
     @Binding var showingStopAlert: Bool
 
     var hrPercent: Double {
-        guard workoutManager.currentHeartRate > 0 else { return 0 }
-        return min(workoutManager.currentHeartRate / 190, 1.0)
+        guard workoutManager.currentHeartRate > 0, workoutManager.maxHeartRate > 0 else { return 0 }
+        return min(workoutManager.currentHeartRate / Double(workoutManager.maxHeartRate), 1.0)
     }
 
     var body: some View {

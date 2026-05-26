@@ -5,6 +5,7 @@ import Charts
 
 struct HeartRateMonitorView: View {
     @EnvironmentObject var healthKit: HealthKitManager
+    @EnvironmentObject var workoutManager: WorkoutManager
     @State private var history: [HeartRateRecord] = []
     @State private var restingHR: Double = 0
 
@@ -64,7 +65,7 @@ struct HeartRateMonitorView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Зоны ЧСС").font(.headline).foregroundColor(.white)
                         ForEach(hrZones, id: \.name) { zone in
-                            HRZoneRow(zone: zone, currentHR: healthKit.currentHeartRate, maxHR: 190)
+                            HRZoneRow(zone: zone, currentHR: healthKit.currentHeartRate, maxHR: Double(workoutManager.maxHeartRate))
                         }
                     }
                     .padding()
